@@ -1,0 +1,37 @@
+---
+# svc-shop > cluster-ip(default)
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-banana
+spec:
+  selector:
+    app: banana
+  ports:
+  - port: 80
+    targetPort: 80
+---
+# deploy-shop
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: banana
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: banana
+  template:
+    metadata:
+      labels:
+        app: banana
+    spec:
+      containers:
+      - name: banana
+        image: chaewon0720/keduitlab:banana
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "250m"
+        ports:
+        - containerPort: 80

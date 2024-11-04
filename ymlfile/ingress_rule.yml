@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-fruits
+  annotations: 
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: www.test.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /apple(/|$)
+        backend:
+          service:
+            name: svc-apple
+            port: 
+              number: 80
+      - pathType: Prefix
+        path: /banana(/|$)
+        backend:
+          service:
+            name: svc-banana
+            port: 
+              number: 80
+      - pathType: Prefix
+        path: /($)
+        backend:
+          service:
+            name: svc-test
+            port: 
+              number: 80
