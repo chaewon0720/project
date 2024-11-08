@@ -9,7 +9,7 @@ pipeline {
     stage('docker build and push') {
       steps {
         sh '''
-        mv image/Dockerfie . && mv image/index.html .
+        mv image/Dockerfile . && mv image/index.html .
         sudo docker build -t chaewon0720/portal:welcome /image .
         sudo docker push chaewon0720/portal:welcome
         '''
